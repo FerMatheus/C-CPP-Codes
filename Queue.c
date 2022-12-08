@@ -32,6 +32,8 @@ int main()
 
     showQueue(&queue);
 
+    freeQueue(&queue);
+
     return 0;
 }
 
