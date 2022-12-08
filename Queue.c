@@ -39,10 +39,10 @@ int main()
 
 Queue initQueue(int length, Queue *queue)
 {
-    queue->bottom = -1;
-    queue->top = -1;
+    queue->bottom = 0;
+    queue->top = 0;
     queue->qtde = 0;
-    queue->queue = malloc(sizeof(Queue) * length);
+    queue->queue = malloc(sizeof(int) * length);
 }
 
 void freeQueue(Queue *queue)
@@ -63,8 +63,8 @@ bool inQueue(Queue *queue, int item)
 {
     if (!isFull(&queue))
     {
-        queue->queue[++queue->bottom] = item;
-        queue->bottom = queue->bottom % sizeof(queue->queue);
+        queue->queue[queue->bottom] = item;
+        queue->bottom = queue->bottom + 1 % sizeof(queue->queue);
         queue->qtde++;
         return true;
     }
@@ -89,8 +89,8 @@ int deQueue(Queue *queue)
 {
     if (!isEmpty(&queue))
     {
-        int item = queue->queue[++queue->top];
-        queue->top = queue->top % sizeof(queue->queue);
+        int item = queue->queue[queue->top];
+        queue->top = queue->top + 1 % sizeof(queue->queue);
         queue->qtde--;
         return true;
     }
@@ -104,7 +104,7 @@ void showQueue(Queue *queue)
         {
             queue->top = 0;
         }
-        for (int i = queue->top; i != queue->bottom; i = (++i) % sizeof(queue->queue))
+        for (int i = queue->top; i != queue->bottom; i = (i + 1) % sizeof(queue->queue))
         {
             printf("%d", queue->queue[i]);
         }

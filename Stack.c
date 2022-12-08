@@ -32,7 +32,7 @@ Stack initStack(int length)
 {
     Stack stack;
     stack.top = -1;
-    stack.vector = malloc(sizeof(Stack) * length);
+    stack.vector = malloc(sizeof(int) * length);
     return stack;
 }
 bool isFull(Stack *stack)
